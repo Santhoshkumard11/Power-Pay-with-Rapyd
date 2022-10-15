@@ -1,7 +1,6 @@
 # Power Pay with Rapyd
 B2B payments are done smart, fast, and in an extra secure way with Microsoft's Power Platform tools
 
-### NOTE: Please check the Judge section for email and password to access the Microsoft office tenant used to build this application and steps to use/test the application
 
 ## YouTube Demo Video 📺📺
 ### [Click here to watch the demo](https://www.youtube.com/watch?v=WWD2JrgJoss&ab_channel=LateNightCodewithSanthosh)
