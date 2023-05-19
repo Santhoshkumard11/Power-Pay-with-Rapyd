@@ -51,7 +51,7 @@ def generate_checkout_id(price: str, invoice_number: str) -> str:
                 "requested_currency": "USD",
                 "merchant_reference_id": "950ae8c6-76",
                 "language": "en",
-                "payment_method_type_categories": ["card"],
+                "payment_method_type": "us_debit_visa_card",
                 "metadata": {"InvoiceNumber": invoice_number},
             }
         )
@@ -74,6 +74,8 @@ def generate_checkout_id(price: str, invoice_number: str) -> str:
         logging.info("There is an error while requesting checkout ID from Rapyd")
         raise
 
-    logging.info(f"Successfully generated checkout ID - {checkout_id} for price - {price}")
+    logging.info(
+        f"Successfully generated checkout ID - {checkout_id} for price - {price}"
+    )
 
     return checkout_id

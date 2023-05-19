@@ -24,6 +24,7 @@ class GraphClient:
             client_id=self.client_id,
             client_credential=self.client_secret,
             authority=self.authority,
+            azure_region="eastus"
         )
 
         # gives us access to the scopes within the application
@@ -45,7 +46,8 @@ class GraphClient:
             self.access_token = result["access_token"]
             logging.info("Successfully retrieved the token")
         else:
-            logging.info(f"Token can't be fetched, {result['error']}")
+            self.access_token = ""
+            logging.info(f"Token can't be fetched, {result['error']} - \n{result}")
 
     def send_msft_graph_request(self, url: str, method="GET", payload=None) -> dict:
         """Generic method to send various type of request to Graph APIs
@@ -62,6 +64,9 @@ class GraphClient:
         # if we don't have an access token then get a new one
         if not self.access_token:
             self.get_graph_access_token()
+
+        if self.access_token.__len__() == 0:
+            raise Exception("Token is not available")
 
         return_response = ""
 
@@ -87,7 +92,6 @@ class GraphClient:
             logging.info(f"Sending a patch request to - {url}")
 
             try:
-
                 graph_result_data = requests.patch(
                     url,
                     headers={
@@ -112,7 +116,6 @@ class GraphClient:
             logging.info(f"Sending a post request to - {url}")
 
             try:
-
                 graph_result_data = requests.post(
                     url,
                     headers={
